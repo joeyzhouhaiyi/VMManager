@@ -3,18 +3,14 @@ package com.company;
 public enum MyClock implements Runnable {
     INSTANCE(1000);
     private int time;
-    private boolean finishProg;
+    private boolean quit = false;
 
     MyClock(int i){
         time = i;
-        finishProg = false;
     }
 
-    public boolean isFinishProg(){
-        return finishProg;
-    }
-    public void setFinishProg(boolean finishProg){
-        this.finishProg = finishProg;
+    public void quit(){
+        quit= true;
     }
 
     public  int getTime(){
@@ -27,7 +23,7 @@ public enum MyClock implements Runnable {
 
     @Override
     public void run() {
-        while(!finishProg){
+        while(!quit){
             try{
                 Thread.sleep(100);
             }catch (Exception e){

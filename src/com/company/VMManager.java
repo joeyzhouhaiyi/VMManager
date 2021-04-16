@@ -4,21 +4,22 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 // need to run on its own thread
-public class VMManager {
+public class VMManager extends Thread {
     List<Page> mainMemory = new ArrayList<>();
     final String VMPATH = "vm.txt";
     int mainMemorySize;
+    boolean quit = false;
 
-    public VMManager (int size)
-    {
-        mainMemorySize = size;
+    
+    public VMManager ()    {
+
     }
+    public void setSize(int size) {mainMemorySize = size;}
 
     public void Store(String id, int value, String callerName)
     {
@@ -201,5 +202,14 @@ public class VMManager {
     public void printSwap(String id, String swappedId, int time, String callerName)
     {
         System.out.println("Clock:"+ time + ", " + callerName +", Swap: " + id + " with " + swappedId);
+    }
+
+    public void quit() {quit = true;}
+    @Override
+    public void run() {
+        while (!quit)
+        {
+
+        }
     }
 }
