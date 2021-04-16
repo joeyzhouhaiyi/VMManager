@@ -50,9 +50,11 @@ public class Main {
         //mmu
         VMManager MMU = new VMManager();
         MMU.setSize(Integer.parseInt(memSize.trim()));
+        //commands
+        Commands commands = new Commands();
+        commands.setCommands(commadList);
         //scheduler
         Scheduler scheduler = new Scheduler();
-        scheduler.setCommandList(commadList);
         int status = scheduler.setProcessQ(processList);
         if(status == -1)
             return;
@@ -64,16 +66,27 @@ public class Main {
         MMU.start();
         scheduler.start();
 
-        // stop all threads
+
+        while(scheduler.processQ.size()!=0 || scheduler.runningProcesses.size() != 0){
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
         scheduler.quit();
         MMU.quit();
         MyClock.INSTANCE.quit();
-
+        System.out.println("stop all threads");
         // wait for all to finish
         try {
             clock.join();
             MMU.join();
             scheduler.join();
+
+            // stop all threads
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

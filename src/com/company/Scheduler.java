@@ -1,15 +1,14 @@
 package com.company;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class Scheduler extends Thread {
     int coreNumber;
+    static int commandIndex = 0;
+    static int runningProcessCount = 0;
     List<Command> commandList = new ArrayList<>();
-    Queue<UserProcess> processQ = new LinkedList<>();
+    List<UserProcess> processQ = new ArrayList<>();
+    List<UserProcess> runningProcesses = new ArrayList<>();
     boolean quit = false;
 
     public int setProcessQ(List<String> processes)
@@ -38,6 +37,10 @@ public class Scheduler extends Thread {
         return 0;
     }
 
+    public List<UserProcess> getProcessQ() {
+        return processQ;
+    }
+
     public void setCommandList(List<String> commandList)
     {
         for (String c : commandList)
@@ -60,11 +63,63 @@ public class Scheduler extends Thread {
     }
 
 
+    void StartProcess(){runningProcessCount++;}
+    void StopProcess()
+    {
+        if(runningProcessCount > 0)
+            runningProcessCount --;
+        else
+            runningProcessCount = 0;
+    }
+
+
+    void checkProcessFinished()
+    {
+        for(UserProcess up : runningProcesses)
+        {
+            if(up.isFinished)
+            {
+                try {
+                    up.join(); //joining running thread
+                    System.out.println("Clock: " + MyClock.INSTANCE.getTime() +", "+ up.getProcessName() + ": Finished.");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                StopProcess();
+                runningProcesses.remove(up);
+            }
+
+        }
+    }
+
+
+    //start process in start time order
+    //keep track on each process's start and finish time
+    //have process pick commands synchronously
+
     public void quit(){quit = true;}
     @Override
     public void run() {
-        while (!quit)
+        processQ.sort(Comparator.comparingInt( startTime -> startTime.startTime));
+        while (!quit && processQ.size() != 0)
         {
+            try {
+                sleep(15);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //if time has arrived and max number of process not reached
+            if(MyClock.INSTANCE.getTime()/1000 >= processQ.get(0).startTime
+                    && runningProcessCount < coreNumber)
+            {
+                UserProcess up = processQ.get(0);
+                up.start();
+                System.out.println("Clock: " + MyClock.INSTANCE.getTime() +", "+ up.getProcessName() + ": Started.");
+                StartProcess(); // increment counter
+                runningProcesses.add(up);
+                processQ.remove(0);
+            }
+            checkProcessFinished();
 
         }
     }

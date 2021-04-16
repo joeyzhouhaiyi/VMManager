@@ -25,11 +25,11 @@ public enum MyClock implements Runnable {
     public void run() {
         while(!quit){
             try{
-                Thread.sleep(100);
+                Thread.sleep(10);
             }catch (Exception e){
                 e.printStackTrace();
             }
-            time += 100;
+            time += 10;
         }
     }
 }

@@ -51,7 +51,7 @@ public class VMManager extends Thread {
                 System.out.println("Store command failed");
             }
         }
-        System.out.println("NEW, main memory size: " + mainMemory.size());
+        System.out.println("NEW");
     }
 
     public void Release(String id, String callerName)
@@ -98,7 +98,7 @@ public class VMManager extends Thread {
             if(mainMemory.get(i).id.equals(id))
             {
                 Page p = mainMemory.get(i);
-                print(3, p.id, p.value,timeNow,callerName);
+                //print(3, p.id, p.value,timeNow,callerName);
                 return p.value;
             }
         }
@@ -204,12 +204,41 @@ public class VMManager extends Thread {
         System.out.println("Clock:"+ time + ", " + callerName +", Swap: " + id + " with " + swappedId);
     }
 
+    void listen()
+    {
+        if(Commands.commandQ.size()!= 0)
+        {
+            Command c = Commands.commandQ.get(0);
+
+            if(c.getType() == Command.CommandType.Store)
+            {
+                String[] id_value = c.getParams().split(" ");
+                Store(id_value[0],Integer.parseInt(id_value[1]),c.getCaller().getProcessName());
+            }else if(c.getType() == Command.CommandType.Release)
+            {
+                Release(c.getParams(),c.getCaller().getProcessName());
+            }else if(c.getType() == Command.CommandType.Lookup)
+            {
+                int value = Lookup(c.getParams(),c.getCaller().getProcessName());
+                print(3, c.getParams(), value,MyClock.INSTANCE.getTime(),c.getCaller().getProcessName());
+            }
+            // command completed, remove from Q
+            Commands.commandQ.remove(0);
+        }
+    }
+
+
     public void quit() {quit = true;}
     @Override
     public void run() {
         while (!quit)
         {
-
+            try {
+                sleep(15);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            listen();
         }
     }
 }
