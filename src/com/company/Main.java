@@ -67,7 +67,7 @@ public class Main {
         scheduler.start();
 
 
-        while(scheduler.processQ.size()!=0 || scheduler.runningProcesses.size() != 0){
+        while(scheduler.processQ.size()!=0 || scheduler.getRunningProcesses().size() != 0){
             try {
                 Thread.sleep(20);
             } catch (InterruptedException e) {

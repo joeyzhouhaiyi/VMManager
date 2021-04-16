@@ -204,6 +204,7 @@ public class VMManager extends Thread {
         System.out.println("Clock:"+ time + ", " + callerName +", Swap: " + id + " with " + swappedId);
     }
 
+    // always listen to shared memory to see if there's any new commands
     void listen()
     {
         if(Commands.commandQ.size()!= 0)

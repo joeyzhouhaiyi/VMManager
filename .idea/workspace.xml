@@ -67,26 +67,26 @@
     </state>
     <state x="765" y="228" key="#com.intellij.ide.util.MemberChooser/-2160.0.1728.1120/0.0.1920.1040@0.0.1920.1040" timestamp="1618172556892" />
     <state x="2925" y="228" key="#com.intellij.ide.util.MemberChooser/0.0.1728.1112/2160.0.1920.1040@2160.0.1920.1040" timestamp="1617939205836" />
-    <state width="1899" height="331" key="GridCell.Tab.0.bottom" timestamp="1618599759019">
+    <state width="1899" height="331" key="GridCell.Tab.0.bottom" timestamp="1618607483502">
       <screen x="2160" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.0.bottom/-2160.0.1728.1120/0.0.1920.1040@0.0.1920.1040" timestamp="1618343197196" />
-    <state width="1899" height="331" key="GridCell.Tab.0.bottom/0.0.1728.1112/2160.0.1920.1040@2160.0.1920.1040" timestamp="1618599759019" />
-    <state width="1899" height="331" key="GridCell.Tab.0.center" timestamp="1618599759019">
+    <state width="1899" height="331" key="GridCell.Tab.0.bottom/0.0.1728.1112/2160.0.1920.1040@2160.0.1920.1040" timestamp="1618607483502" />
+    <state width="1899" height="331" key="GridCell.Tab.0.center" timestamp="1618607483502">
       <screen x="2160" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.0.center/-2160.0.1728.1120/0.0.1920.1040@0.0.1920.1040" timestamp="1618343197196" />
-    <state width="1899" height="331" key="GridCell.Tab.0.center/0.0.1728.1112/2160.0.1920.1040@2160.0.1920.1040" timestamp="1618599759019" />
-    <state width="1899" height="331" key="GridCell.Tab.0.left" timestamp="1618599759018">
+    <state width="1899" height="331" key="GridCell.Tab.0.center/0.0.1728.1112/2160.0.1920.1040@2160.0.1920.1040" timestamp="1618607483502" />
+    <state width="1899" height="331" key="GridCell.Tab.0.left" timestamp="1618607483502">
       <screen x="2160" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.0.left/-2160.0.1728.1120/0.0.1920.1040@0.0.1920.1040" timestamp="1618343197196" />
-    <state width="1899" height="331" key="GridCell.Tab.0.left/0.0.1728.1112/2160.0.1920.1040@2160.0.1920.1040" timestamp="1618599759018" />
-    <state width="1899" height="331" key="GridCell.Tab.0.right" timestamp="1618599759019">
+    <state width="1899" height="331" key="GridCell.Tab.0.left/0.0.1728.1112/2160.0.1920.1040@2160.0.1920.1040" timestamp="1618607483502" />
+    <state width="1899" height="331" key="GridCell.Tab.0.right" timestamp="1618607483502">
       <screen x="2160" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.0.right/-2160.0.1728.1120/0.0.1920.1040@0.0.1920.1040" timestamp="1618343197196" />
-    <state width="1899" height="331" key="GridCell.Tab.0.right/0.0.1728.1112/2160.0.1920.1040@2160.0.1920.1040" timestamp="1618599759019" />
+    <state width="1899" height="331" key="GridCell.Tab.0.right/0.0.1728.1112/2160.0.1920.1040@2160.0.1920.1040" timestamp="1618607483502" />
     <state x="2812" y="347" key="com.intellij.ide.util.TipDialog" timestamp="1618526944365">
       <screen x="2160" y="0" width="1920" height="1040" />
     </state>
@@ -96,19 +96,19 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/company/VMManager.java</url>
-          <line>208</line>
-          <option name="timeStamp" value="8" />
+          <url>file://$PROJECT_DIR$/src/com/company/UserProcess.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/company/VMManager.java</url>
-          <line>240</line>
-          <option name="timeStamp" value="9" />
+          <url>file://$PROJECT_DIR$/src/com/company/Scheduler.java</url>
+          <line>126</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/company/VMManager.java</url>
-          <line>233</line>
-          <option name="timeStamp" value="10" />
+          <url>file://$PROJECT_DIR$/src/com/company/Scheduler.java</url>
+          <line>108</line>
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

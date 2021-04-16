@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Commands {
-    static List<Command> commands = new ArrayList<>();
-    static int commandIndex = 0;
-    static int commandCount = 0;
-    // shared memory, shared Q
+    static List<Command> commands = new ArrayList<>();  // full list of commands represented by <Command> objects
+    static int commandIndex = 0;    // the index pointing to the next command in the list
+    static int commandCount = 0;    // the total count of the commands in the list
+
+    // shared memory, shared between MMU and processes
     public static List<Command> commandQ = new ArrayList<>();
 
     public void setCommands(List<String> commandList)
@@ -32,6 +33,7 @@ public class Commands {
         commandCount = commands.size();
     }
 
+    // any process will call this method to pick the next command from the list
     synchronized public static void PickNext(UserProcess up)
     {
         Command c = commands.get(commandIndex);

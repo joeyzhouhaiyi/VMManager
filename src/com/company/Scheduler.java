@@ -41,6 +41,10 @@ public class Scheduler extends Thread {
         return processQ;
     }
 
+    synchronized public List<UserProcess> getRunningProcesses() {
+        return runningProcesses;
+    }
+
     public void setCommandList(List<String> commandList)
     {
         for (String c : commandList)
@@ -75,7 +79,7 @@ public class Scheduler extends Thread {
 
     void checkProcessFinished()
     {
-        for(UserProcess up : runningProcesses)
+        for(UserProcess up : getRunningProcesses())
         {
             if(up.isFinished)
             {
@@ -87,6 +91,7 @@ public class Scheduler extends Thread {
                 }
                 StopProcess();
                 runningProcesses.remove(up);
+                break;
             }
 
         }
@@ -101,7 +106,7 @@ public class Scheduler extends Thread {
     @Override
     public void run() {
         processQ.sort(Comparator.comparingInt( startTime -> startTime.startTime));
-        while (!quit && processQ.size() != 0)
+        while (processQ.size() != 0)
         {
             try {
                 sleep(15);
@@ -121,6 +126,10 @@ public class Scheduler extends Thread {
             }
             checkProcessFinished();
 
+        }
+        while(!quit)
+        {
+            checkProcessFinished();
         }
     }
 }
