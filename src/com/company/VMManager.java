@@ -182,17 +182,23 @@ public class VMManager extends Thread {
         {
             case 1:
             {
-                System.out.println("Clock:"+ time + ", " + callerName +", Store: " + id + ", value = " + value);
+                String s = "Clock:"+ time + ", " + callerName +", Store: " + id + ", value = " + value;
+                System.out.println(s);
+                OutputLogger.getInstance().writeLine(s);
                 break;
             }
             case 2:
             {
-                System.out.println("Clock:"+ time + ", " + callerName + ", Release: " + id);
+                String s = "Clock:"+ time + ", " + callerName + ", Release: " + id;
+                System.out.println(s);
+                OutputLogger.getInstance().writeLine(s);
                 break;
             }
             case 3:
             {
-                System.out.println("Clock:"+ time + ", " + callerName + ", Lookup: " + id + ", value = " + value);
+                String s = "Clock:"+ time + ", " + callerName + ", Lookup: " + id + ", value = " + value;
+                System.out.println(s);
+                OutputLogger.getInstance().writeLine(s);
                 break;
             }
         }
@@ -201,7 +207,9 @@ public class VMManager extends Thread {
 
     public void printSwap(String id, String swappedId, int time, String callerName)
     {
-        System.out.println("Clock:"+ time + ", " + callerName +", Swap: " + id + " with " + swappedId);
+        String s = "Clock:"+ time + ", " + callerName +", Swap: " + id + " with " + swappedId;
+        System.out.println(s);
+        OutputLogger.getInstance().writeLine(s);
     }
 
     // always listen to shared memory to see if there's any new commands
@@ -239,7 +247,7 @@ public class VMManager extends Thread {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            listen();
+            listen();   // keep listening for new command to be excuted
         }
     }
 }

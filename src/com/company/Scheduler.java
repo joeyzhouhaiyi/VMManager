@@ -2,13 +2,14 @@ package com.company;
 
 import java.util.*;
 
+/***
+ * this class schedules processes in a FIFO order
+ */
 public class Scheduler extends Thread {
     int coreNumber;
-    static int commandIndex = 0;
     static int runningProcessCount = 0;
-    List<Command> commandList = new ArrayList<>();
-    List<UserProcess> processQ = new ArrayList<>();
-    List<UserProcess> runningProcesses = new ArrayList<>();
+    List<UserProcess> processQ = new ArrayList<>(); // full list of processes parsed from processes.txt
+    List<UserProcess> runningProcesses = new ArrayList<>(); // processes that are running at the moment
     boolean quit = false;
 
     public int setProcessQ(List<String> processes)
@@ -37,33 +38,8 @@ public class Scheduler extends Thread {
         return 0;
     }
 
-    public List<UserProcess> getProcessQ() {
-        return processQ;
-    }
-
     synchronized public List<UserProcess> getRunningProcesses() {
         return runningProcesses;
-    }
-
-    public void setCommandList(List<String> commandList)
-    {
-        for (String c : commandList)
-        {
-            String[] content = c.split(" ");
-            if(content[0].equals("Store"))
-            {
-                this.commandList.add(new Command(null, Command.CommandType.Store, content[1]+" "+ content[2]));
-            }else if(content[0].equals("Release"))
-            {
-                this.commandList.add(new Command(null, Command.CommandType.Release, content[1]));
-            }else if(content[0].equals("Lookup"))
-            {
-                this.commandList.add(new Command(null, Command.CommandType.Lookup, content[1]));
-            }else
-            {
-                System.out.println("found invalid commands: " + c);
-            }
-        }
     }
 
 
@@ -77,6 +53,9 @@ public class Scheduler extends Thread {
     }
 
 
+    // when process's isFinished flag is set to true,
+    // this function prints the finished text and calls join() function of the thread
+    // then remove that thread from the running processes list
     void checkProcessFinished()
     {
         for(UserProcess up : getRunningProcesses())
@@ -85,7 +64,9 @@ public class Scheduler extends Thread {
             {
                 try {
                     up.join(); //joining running thread
-                    System.out.println("Clock: " + MyClock.INSTANCE.getTime() +", "+ up.getProcessName() + ": Finished.");
+                    String s = "Clock: " + MyClock.INSTANCE.getTime() +", "+ up.getProcessName() + ": Finished.";
+                    System.out.println(s);
+                    OutputLogger.getInstance().writeLine(s);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -98,7 +79,7 @@ public class Scheduler extends Thread {
     }
 
 
-    //start process in start time order
+    //start process in FIFO order
     //keep track on each process's start and finish time
     //have process pick commands synchronously
 
@@ -119,7 +100,9 @@ public class Scheduler extends Thread {
             {
                 UserProcess up = processQ.get(0);
                 up.start();
-                System.out.println("Clock: " + MyClock.INSTANCE.getTime() +", "+ up.getProcessName() + ": Started.");
+                String s = "Clock: " + MyClock.INSTANCE.getTime() +", "+ up.getProcessName() + ": Started.";
+                System.out.println(s);
+                OutputLogger.getInstance().writeLine(s);
                 StartProcess(); // increment counter
                 runningProcesses.add(up);
                 processQ.remove(0);

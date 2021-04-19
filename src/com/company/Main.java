@@ -1,7 +1,6 @@
 package com.company;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,6 +9,10 @@ import java.util.List;
 public class Main {
 
     /***
+     * Programming assignment #3 By
+     * Haiyi Zhou 27008457
+     * Yushan Yang 40099151
+     * Zhuoyan Li 40061140
      *
      * @param args
      * args[0] - processes.txt
@@ -20,7 +23,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         BufferedReader reader = null;
-
+        OutputLogger.getInstance();
         //process processes.txt
         reader = new BufferedReader(new FileReader(args[0]));
         List<String> processList = new ArrayList<>();
@@ -42,7 +45,9 @@ public class Main {
         while( (line = reader.readLine()) != null)
             commadList.add(index++, line);
 
-
+        if( reader != null)
+            // close reader
+            reader.close();
 
         // init threads in order
         //clock
@@ -66,7 +71,7 @@ public class Main {
         MMU.start();
         scheduler.start();
 
-
+        // hold main until there's is no more process to schedule nor to run
         while(scheduler.processQ.size()!=0 || scheduler.getRunningProcesses().size() != 0){
             try {
                 Thread.sleep(20);
@@ -79,13 +84,15 @@ public class Main {
         MMU.quit();
         MyClock.INSTANCE.quit();
         System.out.println("stop all threads");
+        // close writer
+        OutputLogger.getInstance().close();
+
         // wait for all to finish
         try {
             clock.join();
             MMU.join();
             scheduler.join();
 
-            // stop all threads
 
         } catch (InterruptedException e) {
             e.printStackTrace();

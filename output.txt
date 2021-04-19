@@ -1,0 +1,27 @@
+Clock: 1000, Process 2: Started.
+Clock:1010, Process 2, Store: 1, value = 5
+Clock:1330, Process 2, Store: 2, value = 3
+Clock: 2000, Process 1: Started.
+Clock:2010, Process 1, Store: 3, value = 7
+Clock:2210, VMManager, Swap: 3 with 2
+Clock:2220, Process 2, Lookup: 3, value = 7
+Clock:2810, VMManager, Swap: 2 with NONE
+Clock:2810, Process 1, Lookup: 2, value = 3
+Clock:3060, Process 1, Release: 1
+Clock: 3140, Process 2: Finished.
+Clock:3270, Process 1, Store: 1, value = 8
+Clock:3660, Process 1, Lookup: 1, value = 8
+Clock:4000, Process 1, Store: 1, value = 5
+Clock: 4000, Process 3: Started.
+Clock:4010, Process 3, Store: 2, value = 3
+Clock:4360, Process 3, Store: 3, value = 7
+Clock:4800, VMManager, Swap: 3 with 2
+Clock:4810, Process 1, Lookup: 3, value = 7
+Clock:5090, VMManager, Swap: 2 with NONE
+Clock:5090, Process 3, Lookup: 2, value = 3
+Clock:5150, Process 3, Release: 1
+Clock:5680, Process 3, Store: 1, value = 8
+Clock: 5710, Process 1: Finished.
+Clock:6170, Process 3, Lookup: 1, value = 8
+Clock:6740, Process 3, Store: 1, value = 5
+Clock: 7500, Process 3: Finished.

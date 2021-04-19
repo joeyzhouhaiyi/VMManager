@@ -17,6 +17,7 @@ public class UserProcess extends Thread{
     }
     public String getProcessName(){return name;}
 
+    // while the process is running, it will constantly pick a command from the commands list
     @Override
     public void run() {
         int actualStartTime = MyClock.INSTANCE.getTime() / 1000;
